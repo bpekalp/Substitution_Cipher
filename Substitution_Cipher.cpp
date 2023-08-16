@@ -40,6 +40,7 @@ void print()
 		case 'Q':
 			cout << "Bye!" << endl;
 			break;
+
 		default:
 			cout << "Wrong input. Try again please!" << endl;
 			break;
