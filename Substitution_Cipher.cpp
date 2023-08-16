@@ -4,16 +4,17 @@
 using namespace std;
 
 string alphabet{ "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" };
-string key{ "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm" };
+string key{ "ikmsyzgTcuMZLHbltYxaJXBOGECqQUoRPrjISDVveWNnAfwFdpKh" };
 string cipher{};
-char c{};
+char selection{};
 
 void print();
-string encrypt(string);
-string decrypt(string);
+void encrypt();
+void decrypt();
 
 int main()
 {
+	print();
 }
 
 void print()
@@ -23,20 +24,16 @@ void print()
 		cout << "1: Encrypt" << endl;
 		cout << "2: Decrypt" << endl;
 		cout << "Q: Quit" << endl;
-		cin >> c;
+		cin >> selection;
 
-		switch (c)
+		switch (selection)
 		{
 		case '1':
-			cout << "Please enter the cipher: ";
-			getline(cin, cipher);
-			cipher = encrypt(cipher);
+			encrypt();
 			break;
 
 		case '2':
-			cout << "Please enter the cipher: ";
-			getline(cin, cipher);
-			cipher = decrypt(cipher);
+			decrypt();
 			break;
 
 		case 'q':
@@ -47,15 +44,45 @@ void print()
 			cout << "Wrong input. Try again please!" << endl;
 			break;
 		}
-	} while (!(c == 'q' || c == 'Q'));
+	} while (!(selection == 'q' || selection == 'Q'));
 }
 
-string encrypt(string s)
+void encrypt()
 {
-	return s;
+	string temp{};
+	cout << "Please enter the cipher: ";
+	getline(cin >> ws, cipher);
+	size_t i{ 0 };
+	for (char c : cipher)
+	{
+		i = alphabet.find(c);
+		if (i == string::npos)
+		{
+			temp += c;
+			continue;
+		}
+		temp += key.at(i);
+	}
+	cout << cipher << " is encrypted to:" << endl;
+	cout << temp << endl;
 }
 
-string decrypt(string s)
+void decrypt()
 {
-	return s;
+	string temp{};
+	cout << "Please enter the cipher: ";
+	getline(cin >> ws, cipher);
+	size_t i{ 0 };
+	for (char c : cipher)
+	{
+		i = key.find(c);
+		if (i == string::npos)
+		{
+			temp += c;
+			continue;
+		}
+		temp += alphabet.at(i);
+	}
+	cout << cipher << " is decrypted to:" << endl;
+	cout << temp << endl;
 }
